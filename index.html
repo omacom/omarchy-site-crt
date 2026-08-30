@@ -109,7 +109,7 @@
   </style>
 </head>
 <body>
-  <iframe id="tube" title="Omarchy video" aria-hidden="true" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  <iframe id="tube" title="Omarchy video" aria-hidden="true" tabindex="-1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
   <canvas id="crt" aria-hidden="true"></canvas>
   <button id="back" type="button" aria-label="Back to listing"></button>
   <div id="offscreen" aria-hidden="true"><canvas id="etch"></canvas></div>
@@ -733,11 +733,16 @@
       tube.title = item.title || "Omarchy video";
       backBtn.classList.add("is-on");
       crtCanvas.classList.add("is-watching");
+      a11yNav.setAttribute("inert", "");
+      if (document.activeElement && document.activeElement !== document.body) {
+        document.activeElement.blur();
+      }
       beep(660, 0.05, 0.03);
     }
 
     function stopVideo() {
       if (!playing) return;
+      const was = playing;
       playing = null;
       tube.src = "";
       tube.style.display = "none";
@@ -746,6 +751,8 @@
       backBtn.classList.remove("is-on");
       backHot = false;
       crtCanvas.classList.remove("is-watching");
+      a11yNav.removeAttribute("inert");
+      applyFocus(hits.find((item) => sameHit(item, was)) || was);
     }
 
     function activate(item) {
@@ -1382,6 +1389,11 @@
         if (e.key === "q" || e.key === "Q" || e.code === "Escape") {
           e.preventDefault();
           stopVideo();
+          return;
+        }
+        if (e.key === "Tab" || e.key === "ArrowLeft" || e.key === "ArrowRight" || e.key === "ArrowUp" || e.key === "ArrowDown") {
+          e.preventDefault();
+          backBtn.focus({ preventScroll: true });
         }
         return;
       }
@@ -1448,6 +1460,9 @@
       mouse.y = -1;
     });
 
+    tube.addEventListener("load", () => {
+      if (playing && document.activeElement === tube) tube.blur();
+    });
     backBtn.addEventListener("click", () => stopVideo());
     backBtn.addEventListener("mouseenter", () => { backHot = true; });
     backBtn.addEventListener("mouseleave", () => { backHot = false; });
