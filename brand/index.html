@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Omarchy — brand</title>
+  <meta name="description" content="Official Omarchy logo and wordmark, plus trademark terms.">
+  <link rel="icon" href="../favicon.png">
+  <style>
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("../JetBrainsMono-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("../JetBrainsMono-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-display: block;
+    }
+    :root {
+      --green: #9ece6a;
+      --cyan: #7dcfff;
+      --paper: #c0caf5;
+      --dim: #565f89;
+      --ink: #a9b1d6;
+      --bg: #05060a;
+      --panel: #0b0d14;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    body {
+      /* Faint scanlines, a nod to the boot screen next door. */
+      background-image: repeating-linear-gradient(
+        to bottom, transparent 0, transparent 2px, rgba(0, 0, 0, 0.35) 3px);
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+    a { color: var(--cyan); }
+    h1, h2 {
+      color: var(--green);
+      font-size: 1em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 2.5em 0 1em;
+    }
+    h1 { margin-top: 0; }
+    h1::before, h2::before { content: "# "; color: var(--dim); }
+    figure {
+      margin: 0 0 1em;
+      background: var(--panel);
+      border: 1px solid #1a1f2e;
+      border-radius: 6px;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    figure img { max-width: 100%; height: auto; }
+    figure.logo img { width: 160px; }
+    figure.wordmark img { width: 420px; }
+    ul.files {
+      list-style: none;
+      margin: 0 0 1em;
+      padding: 0;
+    }
+    ul.files li::before { content: "└ "; color: var(--dim); }
+    .prompt { color: var(--dim); }
+    .notice { color: var(--paper); }
+    footer {
+      margin-top: 4em;
+      color: var(--dim);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Omarchy brand</h1>
+    <p><span class="prompt">omarchy $</span> ls brand/</p>
+
+    <h2>Logo</h2>
+    <figure class="logo"><img src="omarchy-logo.svg" alt="Omarchy logo" width="1200" height="1200"></figure>
+    <ul class="files">
+      <li><a href="omarchy-logo.svg" download>omarchy-logo.svg</a> <span class="prompt">(vector)</span></li>
+      <li><a href="omarchy-logo-4096.png" download>omarchy-logo-4096.png</a></li>
+      <li><a href="omarchy-logo-2048.png" download>omarchy-logo-2048.png</a></li>
+      <li><a href="omarchy-logo-1024.png" download>omarchy-logo-1024.png</a></li>
+    </ul>
+
+    <h2>Wordmark</h2>
+    <figure class="wordmark"><img src="omarchy-wordmark.svg" alt="OMARCHY wordmark" width="4105" height="750"></figure>
+    <ul class="files">
+      <li><a href="omarchy-wordmark.svg" download>omarchy-wordmark.svg</a> <span class="prompt">(vector)</span></li>
+      <li><a href="omarchy-wordmark-4096.png" download>omarchy-wordmark-4096.png</a></li>
+      <li><a href="omarchy-wordmark-2048.png" download>omarchy-wordmark-2048.png</a></li>
+    </ul>
+
+    <h2>Trademark</h2>
+    <p class="notice">
+      Omarchy is a pending trademark. It cannot be used without explicit
+      permission. Write <a href="mailto:david@omarchy.org">david@omarchy.org</a>
+      for partnerships.
+    </p>
+
+    <footer><a href="/">&larr; back to the boot screen</a></footer>
+  </main>
+</body>
+</html>
