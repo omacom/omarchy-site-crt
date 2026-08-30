@@ -6,7 +6,7 @@
     python3 -m http.server 8765
 
   then open http://localhost:8765
-  Space / click once to boot. Links go to omarchy.org.
+  Space / click once to boot. Tab walks links. Links go to omarchy.org.
 -->
 <html lang="en">
 <head>
@@ -50,10 +50,10 @@
       display: block;
       width: 100%;
       height: 100%;
-      cursor: pointer;
-    }
-    canvas#crt.is-ready {
       cursor: default;
+    }
+    canvas#crt:not(.is-ready) {
+      cursor: pointer;
     }
     canvas#crt.is-hot {
       cursor: pointer;
@@ -84,6 +84,7 @@
       top: 0;
       overflow: hidden;
     }
+    .sr-only,
     #a11y {
       position: absolute;
       width: 1px;
@@ -108,35 +109,38 @@
   </style>
 </head>
 <body>
-  <iframe id="tube" title="Omarchy video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-  <canvas id="crt"></canvas>
-  <button id="back" type="button" aria-label="back"></button>
-  <div id="offscreen"><canvas id="etch"></canvas></div>
-  <nav id="a11y" aria-label="Omarchy">
-    <a href="https://omarchy.org/news/2026/08/omacom-foundation-launches-with-8-million">Omacom Foundation launches with $10 million</a>
-    <a href="https://dhh.dk">DHH</a>
-    <a href="https://omarchy.org/manual/">manual/</a>
-    <a href="https://iso.omarchy.org/omarchy-4.0.1.iso">iso</a>
-    <a href="https://omarchyplugins.com/">plugins/</a>
-    <a href="https://github.com/omacom/omarchy">github</a>
-    <a href="https://omarchy.org/security/">security/</a>
-    <a href="https://omarchy.org/news/">news/</a>
-    <a href="https://omarchy.org/teams/">teams/</a>
-    <a href="https://omarchy.org/patrons/">patrons/</a>
-    <a href="https://omarchy.org/sponsorships/">sponsorships/</a>
-    <a href="https://omarchy.org/air/">air/</a>
-    <a href="https://discord.gg/tXFUdasqhY">discord</a>
-    <a href="https://omarchy.org/meetups/">meetups/</a>
-    <a href="https://omarchy.org/workstations/">workstations/</a>
-    <a href="https://supply.37signals.com/collections/omarchy">merch</a>
-    <a href="https://www.youtube.com/watch?v=F7fe9pa8OeE">intro.mp4</a>
-    <a href="https://www.youtube.com/watch?v=9SDkU5VDQEQ">networkchuck.mp4</a>
-    <a href="mailto:david@omarchy.org">david@omarchy.org</a>
-    <a href="https://37signals.com">37signals</a>
-    <a href="https://basecamp.com">basecamp</a>
-    <a href="https://hey.com">hey</a>
-    <a href="https://www.cloudflare.com">cloudflare</a>
-  </nav>
+  <iframe id="tube" title="Omarchy video" aria-hidden="true" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  <canvas id="crt" aria-hidden="true"></canvas>
+  <button id="back" type="button" aria-label="Back to listing"></button>
+  <div id="offscreen" aria-hidden="true"><canvas id="etch"></canvas></div>
+  <main>
+    <h1 class="sr-only">Beautiful, Fun & Opinionated Linux by DHH</h1>
+    <nav id="a11y" aria-label="Omarchy">
+      <a href="https://omarchy.org/news/2026/08/omacom-foundation-launches-with-8-million" aria-label="Omacom Foundation launches with $10 million">Omacom Foundation launches with $10 million</a>
+      <a href="https://dhh.dk" aria-label="DHH">DHH</a>
+      <a href="https://omarchy.org/manual/" aria-label="The Manual">manual/</a>
+      <a href="https://iso.omarchy.org/omarchy-4.0.1.iso" aria-label="The ISO">iso</a>
+      <a href="https://omarchyplugins.com/" aria-label="The Plugins">plugins/</a>
+      <a href="https://github.com/omacom/omarchy" aria-label="The Code">github</a>
+      <a href="https://omarchy.org/security/" aria-label="Security reporting">security/</a>
+      <a href="https://omarchy.org/news/" aria-label="The News">news/</a>
+      <a href="https://omarchy.org/teams/" aria-label="The Teams">teams/</a>
+      <a href="https://omarchy.org/patrons/" aria-label="The Patrons">patrons/</a>
+      <a href="https://omarchy.org/sponsorships/" aria-label="The Sponsorships">sponsorships/</a>
+      <a href="https://omarchy.org/air/" aria-label="Artists in Residence">air/</a>
+      <a href="https://discord.gg/tXFUdasqhY" aria-label="The Discord">discord</a>
+      <a href="https://omarchy.org/meetups/" aria-label="The Meetups">meetups/</a>
+      <a href="https://omarchy.org/workstations/" aria-label="The Workstations">workstations/</a>
+      <a href="https://supply.37signals.com/collections/omarchy" aria-label="The Merch">merch</a>
+      <a href="https://www.youtube.com/watch?v=F7fe9pa8OeE" data-youtube="F7fe9pa8OeE" aria-label="Play: Omarchy introduction video">intro.mp4</a>
+      <a href="https://www.youtube.com/watch?v=9SDkU5VDQEQ" data-youtube="9SDkU5VDQEQ" aria-label="Play: You need to switch to Linux RIGHT NOW!! by NetworkChuck">networkchuck.mp4</a>
+      <a href="mailto:david@omarchy.org" aria-label="Email david@omarchy.org">david@omarchy.org</a>
+      <a href="https://37signals.com" aria-label="37signals">37signals</a>
+      <a href="https://basecamp.com" aria-label="Basecamp">basecamp</a>
+      <a href="https://hey.com" aria-label="HEY">hey</a>
+      <a href="https://www.cloudflare.com" aria-label="Cloudflare">cloudflare</a>
+    </nav>
+  </main>
   <script type="module">
     const GREEN = "#9ece6a";
     const MATRIX = "#00ff41";
@@ -203,6 +207,7 @@
       href: "https://omarchy.org/news/2026/08/omacom-foundation-launches-with-8-million",
     };
     const DHH = { name: "dhh", href: "https://dhh.dk" };
+    const TAGLINE = "Beautiful, Fun & Opinionated Linux by ";
 
     const VIDEOS = [
       {
@@ -222,6 +227,7 @@
     const crtCanvas = document.getElementById("crt");
     const tube = document.getElementById("tube");
     const backBtn = document.getElementById("back");
+    const a11yNav = document.getElementById("a11y");
     const etchCanvas = document.getElementById("etch");
     const scene = document.createElement("canvas");
     scene.width = 960;
@@ -242,9 +248,11 @@
     let etchDone = false;
     let assetsReady = false;
     let audio = null;
-    let logoBeeped = false;
     let menuLive = false;
+    let chimePlayed = false;
     let hover = null;
+    let kbdFocus = null;
+    let lastInput = "mouse";
     let hits = [];
     let markBottom = 0;
     let playing = null;
@@ -263,6 +271,7 @@
       mem: 0,
       postLines: 0,
       lastBeepLine: -1,
+      crunches: 0,
     };
 
     function now() {
@@ -285,6 +294,31 @@
       return t * t * (3 - 2 * t);
     }
 
+    function shellMetrics() {
+      const w = scene.width;
+      const h = scene.height;
+      const short = h < 540;
+      const narrow = w < 600;
+      const newsY = narrow ? 38 : Math.round(h * 0.035);
+      const newsH = 22;
+      const brandTop = newsY + newsH + (narrow ? 22 : 10);
+      const logoSize = short ? 44 : 68;
+      const markTop = brandTop + logoSize + (narrow ? 10 : 8);
+      const maxUiW = w * 0.84;
+      let uiFont = short ? 13 : 15;
+      ctx.font = `${uiFont}px "JetBrains Mono", monospace`;
+      const postSamples = POST_LINES.map((line) => {
+        const raw = line.mem ? "MEM  65536K OK" : line.text;
+        return narrow ? raw.replace(/ {2,}/g, "  ") : raw;
+      });
+      const samples = [TAGLINE + "dhh", ...postSamples];
+      while (uiFont > 9 && samples.some((s) => ctx.measureText(s).width > maxUiW)) {
+        uiFont -= 1;
+        ctx.font = `${uiFont}px "JetBrains Mono", monospace`;
+      }
+      return { w, h, short, narrow, newsY, newsH, brandTop, logoSize, markTop, uiFont };
+    }
+
     function beep(freq, dur, gain = 0.035) {
       if (!audio) return;
       const t = audio.currentTime;
@@ -297,6 +331,187 @@
       osc.connect(amp).connect(audio.destination);
       osc.start(t);
       osc.stop(t + dur);
+    }
+
+    let hddNoise = null;
+    function getHddNoise() {
+      if (!audio) return null;
+      if (!hddNoise) {
+        // One frozen seek: VCM click + arm rings (~1.3 / 2.1 kHz) + carriage clunk.
+        const rate = audio.sampleRate;
+        const len = Math.floor(rate * 0.06);
+        hddNoise = audio.createBuffer(1, len, rate);
+        const data = hddNoise.getChannelData(0);
+        for (let i = 0; i < len; i++) {
+          const sec = i / rate;
+          const env = Math.exp(-sec * 58);
+          const click = i < 6 ? (i === 0 ? 0.85 : 0.12) : 0;
+          const clunk = Math.sin(2 * Math.PI * 270 * sec) * Math.exp(-sec * 78) * 0.4;
+          const ring13 = Math.sin(2 * Math.PI * 1300 * sec) * Math.exp(-sec * 68) * 0.32;
+          const ring21 = Math.sin(2 * Math.PI * 2080 * sec) * Math.exp(-sec * 88) * 0.26;
+          const grit = (Math.random() * 2 - 1) * Math.exp(-sec * 110) * 0.16;
+          data[i] = (click + clunk + ring13 + ring21 + grit) * env;
+        }
+      }
+      return hddNoise;
+    }
+
+    function crunch() {
+      if (!audio) return;
+      const buf = getHddNoise();
+      if (!buf) return;
+      const t = audio.currentTime;
+      const src = audio.createBufferSource();
+      src.buffer = buf;
+      const lp = audio.createBiquadFilter();
+      lp.type = "lowpass";
+      lp.frequency.value = 4200;
+      const g = audio.createGain();
+      g.gain.setValueAtTime(0.056, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
+      src.connect(lp).connect(g).connect(audio.destination);
+      src.start(t);
+      src.stop(t + 0.07);
+    }
+
+    const powerOnBytes = fetch(new URL("./power on.m4a", import.meta.url)).then((r) => r.arrayBuffer());
+    let powerOnBuf = null;
+
+    async function playPowerSwitch() {
+      if (!audio) return;
+      if (!powerOnBuf) {
+        powerOnBuf = await audio.decodeAudioData((await powerOnBytes).slice(0));
+      }
+      const src = audio.createBufferSource();
+      src.buffer = powerOnBuf;
+      const g = audio.createGain();
+      g.gain.value = 0.12;
+      src.connect(g).connect(audio.destination);
+      src.start(audio.currentTime);
+    }
+
+    // Systems-online: brighter major color, lighter tape echo.
+    function macChime() {
+      if (!audio) return;
+      const t0 = audio.currentTime;
+      const tail = 5.35;
+
+      const master = audio.createGain();
+      master.gain.setValueAtTime(0.48, t0);
+      master.gain.setValueAtTime(0.48, t0 + 1.4);
+      master.gain.exponentialRampToValueAtTime(0.0001, t0 + tail);
+      master.connect(audio.destination);
+
+      const bus = audio.createGain();
+      const toneLp = audio.createBiquadFilter();
+      toneLp.type = "lowpass";
+      toneLp.Q.value = 0.65;
+      toneLp.frequency.setValueAtTime(520, t0);
+      toneLp.frequency.linearRampToValueAtTime(1400, t0 + 0.26);
+      toneLp.frequency.exponentialRampToValueAtTime(480, t0 + 2.6);
+      bus.connect(toneLp);
+
+      const dry = audio.createGain();
+      dry.gain.value = 0.24;
+      toneLp.connect(dry).connect(master);
+
+      const echo = audio.createDelay(2.0);
+      echo.delayTime.value = 0.36;
+      const echo2 = audio.createDelay(2.0);
+      echo2.delayTime.value = 0.54;
+      const echoDamp = audio.createBiquadFilter();
+      echoDamp.type = "lowpass";
+      echoDamp.frequency.setValueAtTime(2200, t0);
+      echoDamp.frequency.exponentialRampToValueAtTime(700, t0 + 3.2);
+      const echoFb = audio.createGain();
+      echoFb.gain.setValueAtTime(0.48, t0);
+      echoFb.gain.linearRampToValueAtTime(0.34, t0 + 3.6);
+      const echoWet = audio.createGain();
+      echoWet.gain.value = 0.46;
+      toneLp.connect(echo).connect(echoDamp).connect(echoFb);
+      echoFb.connect(echo);
+      echoFb.connect(echo2).connect(echoWet).connect(master);
+      echoFb.connect(echoWet);
+
+      const nLen = Math.floor(audio.sampleRate * 0.3);
+      const nBuf = audio.createBuffer(1, nLen, audio.sampleRate);
+      const nd = nBuf.getChannelData(0);
+      for (let i = 0; i < nLen; i++) {
+        nd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / nLen, 1.4);
+      }
+      const whoosh = audio.createBufferSource();
+      whoosh.buffer = nBuf;
+      const whooshBp = audio.createBiquadFilter();
+      whooshBp.type = "bandpass";
+      whooshBp.frequency.setValueAtTime(240, t0);
+      whooshBp.frequency.exponentialRampToValueAtTime(880, t0 + 0.28);
+      whooshBp.Q.value = 0.75;
+      const whooshG = audio.createGain();
+      whooshG.gain.setValueAtTime(0.0001, t0);
+      whooshG.gain.exponentialRampToValueAtTime(0.12, t0 + 0.05);
+      whooshG.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.48);
+      whoosh.connect(whooshBp).connect(whooshG).connect(bus);
+      whoosh.start(t0);
+      whoosh.stop(t0 + 0.35);
+
+      // D major — same analog stack, just a little sunnier.
+      const voices = [
+        { f: 146.83, type: "sine", g: 0.18, atk: 0.08 },
+        { f: 185.0, type: "triangle", g: 0.12, atk: 0.12 },
+        { f: 220.0, type: "sine", g: 0.1, atk: 0.16 },
+        { f: 293.66, type: "sine", g: 0.045, atk: 0.2 },
+      ];
+      for (const v of voices) {
+        const osc = audio.createOscillator();
+        osc.type = v.type;
+        osc.frequency.value = v.f;
+        const g = audio.createGain();
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(v.g, t0 + v.atk);
+        g.gain.setValueAtTime(v.g, t0 + 0.85);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 3.75);
+        osc.connect(g).connect(bus);
+        osc.start(t0);
+        osc.stop(t0 + 3.95);
+      }
+    }
+
+    function hrefKey(href) {
+      return String(href || "").replace(/\/$/, "");
+    }
+
+    function itemFromLink(el) {
+      if (!el) return null;
+      const yt = el.dataset.youtube;
+      const href = el.getAttribute("href");
+      return hits.find((item) => {
+        if (yt && item.youtube === yt) return true;
+        return item.href && hrefKey(item.href) === hrefKey(href);
+      }) || null;
+    }
+
+    function a11yLinkFor(item) {
+      if (!item) return null;
+      for (const a of a11yNav.querySelectorAll("a")) {
+        if (item.youtube && a.dataset.youtube === item.youtube) return a;
+        if (item.href && hrefKey(a.getAttribute("href")) === hrefKey(item.href)) return a;
+      }
+      return null;
+    }
+
+    function focusables() {
+      return [...hits].sort((a, b) => a.y - b.y || a.x - b.x);
+    }
+
+    function cycleFocus(dir) {
+      const list = focusables();
+      if (!list.length) return;
+      const cur = list.findIndex((item) => sameHit(item, kbdFocus));
+      const idx = cur < 0 ? (dir > 0 ? 0 : list.length - 1) : (cur + dir + list.length) % list.length;
+      kbdFocus = list[idx];
+      lastInput = "key";
+      const link = a11yLinkFor(kbdFocus);
+      if (link) link.focus({ preventScroll: true });
     }
 
     // Old shader used 1.18 / 1.22 zoom (~8–9% inset). Pull that in by ~25px
@@ -426,14 +641,13 @@
     function startBoot() {
       if (!assetsReady || boot.started) return;
       if (!audio) audio = new AudioContext();
-      audio.resume();
+      audio.resume().then(() => playPowerSwitch());
       boot.started = true;
       boot.t0 = now();
       boot.mem = 0;
       boot.postLines = 0;
       boot.lastBeepLine = -1;
-      beep(90, 0.09, 0.05);
-      setTimeout(() => beep(55, 0.12, 0.03), 80);
+      boot.crunches = 0;
     }
 
     function drawBlockCursor(afterX, midY, fontPx) {
@@ -444,7 +658,10 @@
     }
 
     function sameHit(a, b) {
-      return a && b && a.name === b.name && a.href === b.href && a.youtube === b.youtube && a.action === b.action;
+      if (!a || !b) return false;
+      if (a.youtube || b.youtube) return a.youtube === b.youtube;
+      if (a.href && b.href) return hrefKey(a.href) === hrefKey(b.href);
+      return a.name === b.name && a.action === b.action;
     }
 
     function placeTube() {
@@ -471,6 +688,8 @@
       placeTube();
       tube.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(item.youtube)}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
       tube.style.display = "block";
+      tube.removeAttribute("aria-hidden");
+      tube.title = item.title || "Omarchy video";
       backBtn.classList.add("is-on");
       crtCanvas.classList.add("is-watching");
       beep(660, 0.05, 0.03);
@@ -481,6 +700,8 @@
       playing = null;
       tube.src = "";
       tube.style.display = "none";
+      tube.setAttribute("aria-hidden", "true");
+      tube.title = "Omarchy video";
       backBtn.classList.remove("is-on");
       backHot = false;
       crtCanvas.classList.remove("is-watching");
@@ -511,10 +732,11 @@
       ctx.fillText("OMARCHY", w / 2, h * 0.56);
       ctx.fillStyle = DIM;
       ctx.font = "400 14px 'JetBrains Mono', monospace";
-      ctx.fillText(assetsReady ? "PRESS ANY KEY" : "LOADING ROM…", w / 2, h * 0.62);
+      const gateMsg = assetsReady ? "PRESS SPACE / CLICK" : "LOADING ROM…";
+      ctx.fillText(gateMsg, w / 2, h * 0.62);
       if (assetsReady && Math.floor(now() * 2) % 2 === 0) {
         ctx.fillStyle = GREEN;
-        ctx.fillRect(w / 2 + 78, h * 0.62 - 8, 9, 16);
+        ctx.fillRect(w / 2 + ctx.measureText(gateMsg).width * 0.5 + 8, h * 0.62 - 8, 9, 16);
       }
     }
 
@@ -524,7 +746,11 @@
       boot.postLines = shown;
       if (shown > 0 && shown !== boot.lastBeepLine) {
         boot.lastBeepLine = shown;
-        beep(1400 + shown * 40, 0.025, 0.02);
+        const line = POST_LINES[shown - 1];
+        if (line && line.text && boot.crunches < 5) {
+          boot.crunches += 1;
+          crunch();
+        }
       }
 
       if (shown >= 5) {
@@ -535,12 +761,14 @@
       const fade = 1 - ease(clamp((t - 1.75) / 0.28, 0, 1));
       if (fade <= 0) return;
 
+      const { w, h, narrow, uiFont } = shellMetrics();
       ctx.save();
       ctx.globalAlpha = fade;
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
-      ctx.font = "400 16px 'JetBrains Mono', monospace";
-      let y = scene.height * 0.08;
+      ctx.font = `400 ${uiFont}px "JetBrains Mono", monospace`;
+      let y = Math.max(h * 0.08, 36);
+      const rowH = uiFont + 10;
       for (let i = 0; i < shown; i++) {
         const line = POST_LINES[i];
         let text = line.text;
@@ -548,30 +776,25 @@
           const k = String(boot.mem).padStart(5, "0");
           text = boot.mem >= 65536 ? "MEM  65536K OK" : `MEM  ${k}K`;
         }
+        if (narrow) text = text.replace(/ {2,}/g, "  ");
         ctx.fillStyle = line.color;
-        ctx.fillText(text, scene.width * 0.07, y);
-        y += 26;
+        ctx.fillText(text, w * 0.08, y);
+        y += rowH;
       }
       ctx.restore();
     }
 
     function drawLogo(t) {
       if (!logo.complete || !logo.naturalWidth) return;
-      const w = scene.width;
-      const h = scene.height;
-      const short = h < 540;
+      const { w, h, short, brandTop, logoSize } = shellMetrics();
       const appear = clamp((t - 2.2) / 1.45, 0, 1);
       if (appear <= 0) return;
-      if (appear > 0 && !logoBeeped) {
-        logoBeeped = true;
-        beep(520, 0.08, 0.04);
-      }
 
       const up = ease(clamp((t - 4.0) / 0.5, 0, 1));
       const settle = ease(clamp((t - 6.9) / 0.55, 0, 1));
-      const size = lerp(lerp(Math.min(268, h * 0.38), short ? 64 : 100, up), short ? 44 : 68, settle);
+      const size = lerp(lerp(Math.min(268, h * 0.38), short ? 64 : 100, up), logoSize, settle);
       const cx = w / 2;
-      const cy = lerp(lerp(h * 0.46, h * 0.22, up), h * (short ? 0.09 : 0.1), settle);
+      const cy = lerp(lerp(h * 0.46, h * 0.22, up), brandTop + size * 0.5, settle);
       const x = cx - size / 2;
       const y = cy - size / 2;
 
@@ -599,14 +822,12 @@
       const fade = ease(clamp((t - 4.2) / 0.35, 0, 1));
       if (fade <= 0) return;
 
-      const w = scene.width;
-      const h = scene.height;
-      const short = h < 540;
+      const { w, h, short, markTop } = shellMetrics();
       const settle = ease(clamp((t - 6.9) / 0.55, 0, 1));
       const markW = lerp(Math.min(880, w * 0.92), Math.min(w * (short ? 0.64 : 0.7), short ? 480 : 620), settle);
       const markH = (markW / ETCH_W) * ETCH_H;
       const x = (w - markW) / 2;
-      const y = lerp(h * 0.34, h * (short ? 0.13 : 0.155), settle);
+      const y = lerp(h * 0.34, markTop, settle);
       markBottom = y + markH;
 
       ctx.save();
@@ -628,26 +849,20 @@
 
       if (t > 6.9 && !menuLive) {
         menuLive = true;
-        beep(880, 0.07, 0.03);
-        setTimeout(() => beep(1175, 0.12, 0.03), 90);
         crtCanvas.classList.add("is-ready");
       }
     }
 
     function layoutListing() {
-      const w = scene.width;
-      const h = scene.height;
-      const short = h < 540;
-      const narrow = w < 600;
+      const { w, h, short, narrow, newsY, uiFont } = shellMetrics();
       const compact = short || narrow;
       const wide = w / h > 1.55;
       const files = LINKS;
       const cols = short && wide ? 5 : w < 560 ? 2 : w < 900 ? 3 : 4;
       const rows = Math.ceil(files.length / cols);
-      const font = short ? 13 : 16;
-      const rowH = short ? 20 : 26;
-      // Room for the tagline + "omarchy $ ls" above the first row.
-      const tagLift = short ? 36 : 44;
+      const rowH = uiFont + 10;
+      const promptLift = uiFont + 8;
+      const tagLift = promptLift + uiFont + 8;
       const top = compact
         ? markBottom + tagLift + (short ? 16 : 20)
         : Math.max(markBottom + tagLift + 8, h * 0.48);
@@ -666,36 +881,27 @@
           y: top + row * rowH,
           w: colW,
           h: rowH,
-          font,
+          font: uiFont,
           kind: "ls",
         });
       }
 
-      const newsFont = short ? 12 : 13;
-      ctx.font = `${newsFont}px "JetBrains Mono", monospace`;
+      ctx.font = `${uiFont}px "JetBrains Mono", monospace`;
       items.push({
         ...NEWS,
         x: w * 0.08,
-        y: h * 0.035,
+        y: newsY,
         w: ctx.measureText(NEWS.name).width + 16,
-        h: 22,
-        font: newsFont,
+        h: uiFont + 10,
+        font: uiFont,
         kind: "news",
       });
 
       const maxFootW = w * 0.84;
       const footLeft = w * 0.08;
-      let footFont = short ? 13 : 15;
+      const footFont = uiFont;
       ctx.font = `${footFont}px "JetBrains Mono", monospace`;
-      let footSizes = FOOT.map((item) => ctx.measureText(item.name).width + 16);
-      let longest = Math.max(...footSizes);
-      // Only shrink if a single name still overflows — wrapping is the usual mobile path.
-      while (longest > maxFootW && footFont > 11) {
-        footFont -= 1;
-        ctx.font = `${footFont}px "JetBrains Mono", monospace`;
-        footSizes = FOOT.map((item) => ctx.measureText(item.name).width + 16);
-        longest = Math.max(...footSizes);
-      }
+      const footSizes = FOOT.map((item) => ctx.measureText(item.name).width + 16);
       const footRows = [[]];
       let rowW = 0;
       for (let i = 0; i < FOOT.length; i++) {
@@ -728,25 +934,24 @@
         }
       }
 
-      const tagFont = short ? 13 : 15;
-      const tagMid = top - (short ? 36 : 44);
-      const tagH = short ? 20 : 22;
-      ctx.font = `${tagFont}px "JetBrains Mono", monospace`;
-      const prefixW = ctx.measureText("Beautiful, Fun & Opinionated Linux by ").width;
+      const tagMid = top - tagLift;
+      const tagH = uiFont + 8;
+      ctx.font = `${uiFont}px "JetBrains Mono", monospace`;
+      const prefixW = ctx.measureText(TAGLINE).width;
       items.push({
         ...DHH,
         x: w * 0.08 + prefixW,
         y: tagMid - tagH * 0.5,
         w: ctx.measureText("dhh").width + 16,
         h: tagH,
-        font: tagFont,
+        font: uiFont,
         kind: "tag",
       });
 
       const listBottom = top + rows * rowH;
       const footReserve = footPad + footBlock + 10;
       const thumbGap = short ? 10 : 16;
-      const labelH = short ? 16 : 20;
+      const labelH = uiFont + 6;
       let thumbH = h - footReserve - listBottom - thumbGap - labelH - 8;
       thumbH = clamp(thumbH, short ? 52 : 70, short ? 108 : 148);
       let thumbW = thumbH * (16 / 9);
@@ -764,12 +969,12 @@
           w: thumbW,
           h: thumbH + labelH,
           thumbH,
-          font: short ? 12 : 14,
+          font: uiFont,
           kind: "thumb",
         });
       }
 
-      return { items, top, font, short };
+      return { items, top, font: uiFont, short, tagFont: uiFont, tagLift, promptLift };
     }
 
     function drawListing(t) {
@@ -789,11 +994,11 @@
       ctx.font = `${layout.font}px "JetBrains Mono", monospace`;
       ctx.textAlign = "left";
       ctx.textBaseline = "middle";
-      ctx.fillText("omarchy $ ls", w * 0.08, layout.top - (layout.short ? 18 : 22));
+      ctx.fillText("omarchy $ ls", w * 0.08, layout.top - layout.promptLift);
 
       ctx.fillStyle = PAPER;
-      ctx.font = `${layout.short ? 13 : 15}px "JetBrains Mono", monospace`;
-      ctx.fillText("Beautiful, Fun & Opinionated Linux by ", w * 0.08, layout.top - (layout.short ? 36 : 44));
+      ctx.font = `${layout.tagFont}px "JetBrains Mono", monospace`;
+      ctx.fillText(TAGLINE, w * 0.08, layout.top - layout.tagLift);
 
       for (const item of layout.items) {
         const on = sameHit(hover, item);
@@ -919,6 +1124,10 @@
       drawLogo(t);
       drawEtch(t);
       drawListing(t);
+      if (t >= 4.0 && !chimePlayed) {
+        chimePlayed = true;
+        macChime();
+      }
 
       if (t > 2) {
         ctx.globalAlpha = 0.4;
@@ -1096,8 +1305,10 @@
     function frame() {
       resize();
       const t = bootTime();
-      hover = hitAt(mouse.x < 0 ? null : mouse);
-      crtCanvas.classList.toggle("is-hot", !!hover);
+      const pointed = hitAt(mouse.x < 0 ? null : mouse);
+      const keyed = kbdFocus ? hits.find((item) => sameHit(item, kbdFocus)) : null;
+      hover = pointed || (lastInput === "key" ? keyed : null);
+      crtCanvas.classList.toggle("is-hot", !!pointed);
       drawScene(t);
 
       const z = crtZoom();
@@ -1134,15 +1345,32 @@
         return;
       }
       if (!boot.started) {
-        if (e.code === "Space") e.preventDefault();
+        if (e.code !== "Space" && e.code !== "Enter") return;
+        e.preventDefault();
         startBoot();
         return;
       }
       if (!menuLive) return;
-      if (e.code === "Enter") activate(hover);
+      if (e.key === "Tab") {
+        e.preventDefault();
+        cycleFocus(e.shiftKey ? -1 : 1);
+        return;
+      }
+      if (e.code === "Space" && hover) {
+        e.preventDefault();
+        activate(hover);
+        return;
+      }
+      if (e.code === "Enter" && hover) {
+        if (hover.youtube || !a11yNav.contains(document.activeElement)) {
+          e.preventDefault();
+          activate(hover);
+        }
+      }
     });
 
     crtCanvas.addEventListener("mousemove", (e) => {
+      lastInput = "mouse";
       const pt = screenToScene(e.clientX, e.clientY);
       if (pt) {
         mouse.x = pt.x;
@@ -1151,6 +1379,11 @@
         mouse.x = -1;
         mouse.y = -1;
       }
+    });
+
+    crtCanvas.addEventListener("mouseleave", () => {
+      mouse.x = -1;
+      mouse.y = -1;
     });
 
     backBtn.addEventListener("click", () => stopVideo());
@@ -1166,6 +1399,22 @@
       }
       const item = hitAt(screenToScene(e.clientX, e.clientY));
       if (item) activate(item);
+    });
+
+    a11yNav.addEventListener("focusin", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      lastInput = "key";
+      kbdFocus = itemFromLink(a) || { name: a.textContent.trim(), href: a.getAttribute("href"), youtube: a.dataset.youtube };
+    });
+
+    a11yNav.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a || !a.dataset.youtube) return;
+      const item = itemFromLink(a) || VIDEOS.find((v) => v.youtube === a.dataset.youtube);
+      if (!item || !menuLive) return;
+      e.preventDefault();
+      playVideo(item);
     });
 
     loadAssets().catch((err) => {
