@@ -1355,7 +1355,7 @@
       const t = bootTime();
       const pointed = hitAt(mouse.x < 0 ? null : mouse);
       const keyed = kbdFocus ? hits.find((item) => sameHit(item, kbdFocus)) : null;
-      hover = pointed || (lastInput === "key" ? keyed : null);
+      hover = lastInput === "key" ? keyed : pointed;
       crtCanvas.classList.toggle("is-hot", !!pointed);
       drawScene(t);
 
