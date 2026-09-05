@@ -1,0 +1,93 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("JetBrainsMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: block;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #05060a;
+  overflow: hidden;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+canvas#crt {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
+canvas#crt:not(.is-ready) {
+  cursor: pointer;
+}
+
+canvas#crt.is-hot {
+  cursor: pointer;
+}
+
+canvas#crt.is-watching {
+  pointer-events: none;
+}
+
+#tube {
+  position: absolute;
+  border: 0;
+  z-index: 0;
+  display: none;
+  background: #000;
+}
+
+body {
+  position: relative;
+}
+
+canvas#crt {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#offscreen {
+  position: absolute;
+  width: 972px;
+  height: 240px;
+  left: -9999px;
+  top: 0;
+  overflow: hidden;
+}
+
+.sr-only,
+#a11y {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+#back {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#back.is-on {
+  display: block;
+}
